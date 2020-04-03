@@ -1,0 +1,20 @@
+sudo: required
+services:
+  -  docker
+
+before_install:
+  - docker build -t kristinagenova/react-test -f  ./client/Dockerfile.dev ./client
+
+script:
+  - docker run kristinagenova/react-test npm test
+
+after_success:
+  - docker build -t kristinagenova/multi-client ./client
+  - docker build -t kristinagenova/multi-nginx ./nginx
+  - docker build -t kristinagenova/multi-server ./server
+  - docker build -t kristinagenova/multi-worker ./worker
+  - echo "DOCKER_PASSWORD" | docker login -u  "DOCKER_ID" --password-stdin
+  - docker push kristinagenova/multi-client
+  - docker push kristinagenova/multi-nginx
+  - docker push kristinagenova/multi-server
+  - docker push kristinagenova/multi-worker
