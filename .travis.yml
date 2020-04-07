@@ -10,7 +10,7 @@ script:
 
 after_success:
   - docker build -t kristinagenova/multi-client ./client
-  - docker build -t kristinagenova/multi-nginx ./ngnix
+  - docker build -t kristinagenova/multi-nginx ./nginx
   - docker build -t kristinagenova/multi-server ./server
   - docker build -t kristinagenova/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
