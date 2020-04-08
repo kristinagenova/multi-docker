@@ -24,7 +24,7 @@
     },
     {
       "name": "nginx",
-      "image": "kristinagenova/multi-nginx,",
+      "image": "kristinagenova/multi-nginx",
       "essential": true,
       "portMappings": [
         {
